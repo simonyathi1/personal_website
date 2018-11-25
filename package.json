@@ -1,0 +1,19 @@
+{
+  "name": "personalwebsite",
+  "version": "1.0.0",
+  "description": "Making personal website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Onesimo Nyathi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "save": "^2.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  }
+}
