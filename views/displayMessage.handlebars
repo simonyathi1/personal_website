@@ -1,0 +1,10 @@
+<div class="container">
+    <h1>Messages</h1>
+    {{#each messages}}
+    <h5><b>{{email}}</b></h5>
+    <p><b>{{name}}</b>: {{message}}</p>
+    <hr>
+    {{else}}
+    <p>No messages found</p>
+    {{/each}}
+</div>
