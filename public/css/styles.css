@@ -3,6 +3,16 @@
     margin-bottom: 60px;
 }
 
+body{
+    background-image: url("/images/nyathi2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+}
+
+
 #homepage{
     text-align: center;
 }
@@ -24,4 +34,12 @@ img{
 .col-sm-4{
     margin: 5px 5px 5px 5px;
     padding: 5px 5px 5px 5px;
+}
+
+#alien{
+    margin-left: 200px
+}
+
+.nav-link :hover{
+    color: cyan
 }

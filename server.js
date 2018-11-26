@@ -39,6 +39,10 @@ const Message = mongoose.model('message', new Schema({
     },
     message: {
         type: String
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 }));
 
@@ -53,6 +57,11 @@ app.get('/about', (req, res) => {
 app.get('/contact', (req, res) => {
     res.render('contact');
 });
+
+app.get('/education', (req, res) => {
+    res.render('education');
+});
+
 //setup the post method from the form attributes
 app.post('/getMessage', (req, res) => {
     const newMessage = {
