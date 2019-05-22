@@ -3,11 +3,16 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
-const keys = require('./config/keys');
 
-mongoose.connect(keys.MongoURI).then(() => {
-    console.log('Remote MongoDB connected...')
-});
+const path = require('path');
+const serveStatic = require('serve-static');
+app.use(serveStatic(path.join(__dirname, '/')));
+
+// const keys = require('./config/keys');
+//
+// mongoose.connect(keys.MongoURI).then(() => {
+//     console.log('Remote MongoDB connected...')
+// });
 
 //setup environment variables
 const port = process.env.PORT || 3000;
@@ -21,7 +26,7 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 
 //setup express static public folder for css and js images
-app.use(express.static('public'));
+app.use(express.static('personal_website'));
 
 //setup bodyparser to encode url
 app.use(bodyParser.urlencoded({
@@ -62,13 +67,21 @@ app.get('/education', (req, res) => {
     res.render('education');
 });
 
+app.get('/services', (req, res) => {
+    res.render('services');
+});
+
+app.get('/portfolio-details', (req, res) => {
+    res.render('portfolio-details');
+});
+
 //setup the post method from the form attributes
 app.post('/getMessage', (req, res) => {
     const newMessage = {
         name: req.body.name,
         email: req.body.email,
         message: req.body.message
-    }
+    };
     new Message(newMessage).save()
         .then(() => {
             res.render('inbox')
