@@ -80,7 +80,8 @@ app.post('/getMessage', (req, res) => {
     const newMessage = {
         name: req.body.name,
         email: req.body.email,
-        message: req.body.message
+        message: req.body.message,
+        subject: req.body.subject
     };
     let transporter = nodeMailer.createTransport({
         service: 'gmail',
@@ -97,8 +98,8 @@ app.post('/getMessage', (req, res) => {
     let HelperOptions = {
         from: newMessage.name + ": " + newMessage.email,
         to: 'simonyathi1@gmail.com',
-        subject: 'Website Contact Form',
-        text: newMessage.message
+        subject: newMessage.subject + '***Website Contact Form***',
+        text: newMessage.message + ": \n\n" + newMessage.email
     };
 
     console.log(newMessage.message);
