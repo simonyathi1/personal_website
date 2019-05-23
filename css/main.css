@@ -3351,6 +3351,10 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin: auto;
 }
 
+.re_send {
+    margin: auto;
+}
+
 .testi_slider .testi_item {
     text-align: center;
 }

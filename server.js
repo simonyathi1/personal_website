@@ -1,7 +1,8 @@
+
 const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const nodeMailer = require('nodemailer');
 const app = express();
 
 const path = require('path');
@@ -16,7 +17,6 @@ app.use(serveStatic(path.join(__dirname, '/')));
 
 //setup environment variables
 const port = process.env.PORT || 3000;
-const Schema = mongoose.Schema;
 
 //setup template engine
 app.engine('handlebars', exphbs({
@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //create collection with mongoose
-const Message = mongoose.model('message', new Schema({
+/*const Message = mongoose.model('message', new Schema({
     name: {
         type: String
     },
@@ -49,7 +49,7 @@ const Message = mongoose.model('message', new Schema({
         type: Date,
         default: Date.now
     }
-}));
+}));*/
 
 app.get('/', (req, res) => {
     res.render('home');
@@ -82,13 +82,38 @@ app.post('/getMessage', (req, res) => {
         email: req.body.email,
         message: req.body.message
     };
-    new Message(newMessage).save()
-        .then(() => {
-            res.render('inbox')
-        });
+    let transporter = nodeMailer.createTransport({
+        service: 'gmail',
+        secure: false,
+        port: 25,
+        auth: {
+            user: 'onesimonyathi.online@gmail.com',
+            pass: 'Bondlile.99'
+        },
+        tls: {
+            rejectUnauthorized: false
+        }
+    });
+    let HelperOptions = {
+        from: newMessage.name + ": " + newMessage.email,
+        to: 'simonyathi1@gmail.com',
+        subject: 'Website Contact Form',
+        text: newMessage.message
+    };
+
+    console.log(newMessage.message);
+    transporter.sendMail(HelperOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        } else {
+            console.log("The message was sent!");
+            console.log(info);
+            res.render('inbox');
+        }
+    });
 });
 
-app.get('/displayMessage', (req, res) => {
+/*app.get('/displayMessage', (req, res) => {
     Message.find({}, (err, messages) => {
         if (err) {
             console.log(err);
@@ -98,7 +123,7 @@ app.get('/displayMessage', (req, res) => {
             })
         }
     });
-});
+});*/
 
 app.get('/portfolio', (req, res) => {
     res.render('portfolio');
