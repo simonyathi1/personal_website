@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
@@ -89,7 +89,7 @@ app.post('/getMessage', (req, res) => {
         port: 25,
         auth: {
             user: 'onesimonyathi.online@gmail.com',
-            pass: 'Bondlile.99'
+            pass: process.env.PASSWORD
         },
         tls: {
             rejectUnauthorized: false
@@ -98,7 +98,7 @@ app.post('/getMessage', (req, res) => {
     let HelperOptions = {
         from: newMessage.name + ": " + newMessage.email,
         to: 'simonyathi1@gmail.com',
-        subject: newMessage.subject + '***Website Contact Form***',
+        subject: newMessage.subject + '*Website Contact Form*\n',
         text: newMessage.message + ": \n\n" + newMessage.email
     };
 
@@ -113,18 +113,6 @@ app.post('/getMessage', (req, res) => {
         }
     });
 });
-
-/*app.get('/displayMessage', (req, res) => {
-    Message.find({}, (err, messages) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render('displayMessage', {
-                messages: messages
-            })
-        }
-    });
-});*/
 
 app.get('/portfolio', (req, res) => {
     res.render('portfolio');
