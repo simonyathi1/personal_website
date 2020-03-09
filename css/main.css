@@ -2866,11 +2866,19 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .fideli {
-    color: #35a812;
+    color: #001c4d;
 }
 
 .tech {
-    color: #000000;
+    color: #005aa2;
+}
+
+.fideli:hover {
+    color: #009fdc;
+}
+
+.tech:hover {
+    color: #EA3515;
 }
 
 .banner-img {
